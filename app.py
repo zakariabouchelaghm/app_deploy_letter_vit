@@ -16,9 +16,22 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+# define/import VisionTransformer here
+model = VisionTransformer(
+    image_size=32,
+    patch_size=7,
+    in_channels=1,
+    num_classes=28,
+    embed_dim=64,     # <-- use same values as training
+    num_heads=8,
+    depth=6,
+    mlp_dim=128,
+    drop_rate=0.1
+)
 
-model = torch.load("vit_full.pth", map_location="cpu")  # or "cuda" if GPU available
+model.load_state_dict(torch.load("vit_weights.pth", map_location="cpu"))
 model.eval()
+
 
 with torch.no_grad():
     input_tensor = torch.randn(1, 1, 32, 32)  # Example input tensor
