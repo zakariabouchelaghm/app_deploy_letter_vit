@@ -7,6 +7,7 @@ from PIL import Image
 import base64
 from fastapi.middleware.cors import CORSMiddleware
 import torch
+from vit import VisionTransformer
 
 app=FastAPI()
 app.add_middleware(
