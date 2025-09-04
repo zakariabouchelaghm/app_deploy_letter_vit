@@ -17,7 +17,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-model = torch.load("vit_model.pth", map_location="cpu")  # or "cuda" if GPU available
+model = torch.load("vit_full.pth", map_location="cpu")  # or "cuda" if GPU available
 model.eval()
 
 with torch.no_grad():
