@@ -17,17 +17,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 # define/import VisionTransformer here
-model = VisionTransformer(
-    image_size=32,
-    patch_size=7,
-    in_channels=1,
-    num_classes=28,
-    embed_dim=64,     # <-- use same values as training
-    num_heads=8,
-    depth=6,
-    mlp_dim=128,
-    drop_rate=0.1
-)
+
+BATCH_SIZE=128
+EPOCHS=10
+LEARNING_RATE= 3e-4
+PATCH_SIZE=7
+NUM_CLASSES=28
+IMAGE_SIZE=32
+CHANNELS=1
+EMBED_DIM=256
+NUM_HEADS=8
+DEPTH=6
+MLP_DIM=512
+DROP_RATE=0.1
+
+model=VisionTransformer(IMAGE_SIZE,PATCH_SIZE,CHANNELS,NUM_CLASSES,EMBED_DIM,NUM_HEADS,DEPTH,MLP_DIM,DROP_RATE)
 
 model.load_state_dict(torch.load("vit_weights.pth", map_location="cpu"))
 model.eval()
