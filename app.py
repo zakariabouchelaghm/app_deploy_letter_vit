@@ -60,7 +60,7 @@ async def predict(file: UploadFile = File(...)):
     img_input = np.array(img, dtype="float32")
     img_input = np.expand_dims(img, axis=-1)   # (32, 32, 1)
     img_input = np.expand_dims(img_input, axis=0)  # (1, 32, 32, 1)
-    img_input = torch.from_numpy(img_input).permute(0, 3, 1, 2)
+    img_input = torch.from_numpy(img_input).permute(0, 3, 1, 2).float()
     img_input = (img_input - 0.5) / 0.5
     with torch.no_grad():
         outputs = model(img_input)   # input_tensor shape: [B, C, H, W]
